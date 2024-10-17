@@ -37,21 +37,38 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       backgroundColor: Color(0xffFFFFFF),
+      //backgroundColor: Color(0xffEFF0F0),
       appBar: AppBar(
-          backgroundColor: Color(0xff1AB65C),
-          title: Text(
-            'Home',
-            style: montserrat700.copyWith(
-              fontSize: 24,
-              color: Color(0xffFFFFFF),
-            ),
+        backgroundColor: Color(0xff1AB65C),
+        title: Text(
+          'Home',
+          style: montserrat700.copyWith(
+            fontSize: 24,
+            color: Color(0xffFFFFFF),
           ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(7),
-            ),
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(7),
           ),
-          automaticallyImplyLeading: false),
+        ),
+        automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+            icon: SvgPicture.asset(
+              'assets/icons/trolly-icon.svg', // Update with your SVG path
+              color: Color(0xffFFFFFF), // Color for the icon
+              height: 24, // Adjust the size as needed
+              width: 24, // Adjust the size as needed
+            ),
+            onPressed: () {
+              // Handle cart icon press
+            },
+          ),
+          SizedBox(width: 16), // Space between title and icon
+        ],
+      ),
+
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -146,20 +163,12 @@ class _HomePageState extends State<HomePage> {
               SizedBox(height: 20),
 
               // Product List (sample)
-              Text(
-                'Home',
-                style: TextStyle(
-                  fontSize: screenWidth * 0.06,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(height: 10),
               GridView.builder(
                 shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
+                physics: BouncingScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: 0.7,
+                  childAspectRatio: 0.8,
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                 ),
@@ -169,10 +178,13 @@ class _HomePageState extends State<HomePage> {
                   return ProductCard(
                     imageUrl: 'https://www.foodiesfeed.com/wp-content/uploads/2023/06/pouring-honey-on-pancakes.jpg',
                     title: 'Product $index',
+                    subtitle: 'Fruits',
                     price: '₹${(index + 5.60).toStringAsFixed(2)}/kg',
                   );
                 },
               ),
+
+              SizedBox(height: 10),
             ],
           ),
         ),

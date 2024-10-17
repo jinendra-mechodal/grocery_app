@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart'; // Import the flutter_svg package
 import 'package:get/get.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
@@ -14,17 +15,33 @@ class CustomBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      items: const <BottomNavigationBarItem>[
+      backgroundColor: Color(0xffFFFFFF),
+      items: <BottomNavigationBarItem>[
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
+          icon: SvgPicture.asset(
+            'assets/icons/home-icon.svg', // Update with your SVG path for Home
+            color: selectedIndex == 0 ? Color(0xff1AB65C) : Color(0xffC8C8D3),
+            height: 24,
+            width: 24,
+          ),
           label: 'Home',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.receipt),
+          icon: SvgPicture.asset(
+            'assets/icons/bag-icon.svg', // Update with your SVG path for My Orders
+            color: selectedIndex == 1 ? Color(0xff1AB65C) : Color(0xffC8C8D3),
+            height: 24,
+            width: 24,
+          ),
           label: 'My Orders',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.account_circle),
+          icon: SvgPicture.asset(
+            'assets/icons/user-icon.svg', // Update with your SVG path for Account
+            color: selectedIndex == 2 ? Color(0xff1AB65C) : Color(0xffC8C8D3),
+            height: 24,
+            width: 24,
+          ),
           label: 'Account',
         ),
       ],

@@ -75,6 +75,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:grocery_app/res/fonts/app_fonts.dart';
 
 class CategoriesRow extends StatelessWidget {
   @override
@@ -125,7 +126,9 @@ class CategoryItem extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding:  EdgeInsets.symmetric(
+            horizontal: 14,
+          ),
           child: ClipRRect(
             borderRadius: BorderRadius.only(
               topRight: Radius.circular(6),
@@ -133,8 +136,8 @@ class CategoryItem extends StatelessWidget {
             ),
             child: Image.network(
               imageUrl,
-              height: 70,
-              width: 70,
+              height: 52,
+              width: 95,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
                 return Container(
@@ -147,8 +150,20 @@ class CategoryItem extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(height: 8),
-        Text(label),
+        SizedBox(height: 14),
+        Text(label,
+        style: poppins500.copyWith(
+          color: Color(0xff333836),
+          fontSize: 12,
+        ),
+        ),
+        SizedBox(height: 4),
+        SvgPicture.asset(
+          'assets/icons/right-arrow-icon.svg', // Update with your SVG path
+          color: Color(0xffF38F15),
+          height: 8, // Adjust the size as needed
+          width: 23, // Adjust the size as needed
+        ),
       ],
     );
   }
