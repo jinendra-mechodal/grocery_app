@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+import '../../../../res/fonts/app_fonts.dart';
 import 'widget/CategoryItem.dart';
 import 'widget/ProductCard.dart';
 import 'widget/custom_bottom_navigation_bar.dart';
@@ -14,9 +16,9 @@ class _HomePageState extends State<HomePage> {
 
   // Navigation routes
   final List<String> _routes = [
-    '/home',          // Home
+    '/home', // Home
     '/order_history', // My Orders
-    '/profile',       // Account
+    '/profile', // Account
   ];
 
   void _onItemTapped(int index) {
@@ -29,56 +31,63 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-
     // MediaQuery for screen width and height to make it responsive
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      backgroundColor: Color(0xffFFFFFF),
       appBar: AppBar(
-        title: Text('Home', style: TextStyle(color: Colors.white)),
-        backgroundColor: Colors.green,
-        actions: [
-          IconButton(
-            icon: Icon(Icons.mail_outline),
-            onPressed: () {
-              // Handle mail icon press
-            },
+          backgroundColor: Color(0xff1AB65C),
+          title: Text(
+            'Home',
+            style: montserrat700.copyWith(
+              fontSize: 24,
+              color: Color(0xffFFFFFF),
+            ),
           ),
-        ],
-      ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(7),
+            ),
+          ),
+          automaticallyImplyLeading: false),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 16,
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
-              SizedBox(height: 10,),
-
-              Container(
-                height: 60,
-                width: screenWidth,
-                color: Colors.green,
-              ),
-
-
               // Search Bar
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 16),
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Search Product here',
-                    border: InputBorder.none,
-                    icon: Icon(Icons.search),
-                  ),
-                ),
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 16),
+          margin: EdgeInsets.symmetric(vertical: 16),
+          decoration: BoxDecoration(
+            color: Color(0xffFFFFFF),
+            borderRadius: BorderRadius.circular(30),
+            border: Border.all(color: Color(0xff1AB65C), width: 0.5), // Green border
+          ),
+          child: TextField(
+            style: montserrat500.copyWith(
+              color: Colors.black, // Text color
+            ),
+            decoration: InputDecoration(
+              hintText: 'Search Product here',
+              hintStyle:  montserrat500.copyWith(
+                color: Color(0xffC8C8D3),
               ),
+              border: InputBorder.none,
+              icon: SvgPicture.asset(
+                'assets/icons/search_icon.svg', // Update with your SVG path
+                color: Color(0xff1AB65C),
+                height: 24, // Adjust the size as needed
+                width: 24, // Adjust the size as needed
+              ),
+            ),
+          ),
+        ),
 
               // Categories section
               Row(
@@ -86,45 +95,54 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Text(
                     'Categories',
-                    style: TextStyle(
-                      fontSize: screenWidth * 0.05,
-                      fontWeight: FontWeight.bold,
+                    style: poppins600.copyWith(
+                      fontSize: 16,
+                      color: Color(0xff333836),
                     ),
                   ),
                   TextButton(
                     onPressed: () {
                       // Handle See All action
                     },
-                    child: Text('See All'),
+                    child: Text('See All',
+                      style: poppins400.copyWith(
+                        fontSize: 12,
+                        color: Color(0xff333836),
+                      ),
+                    ),
                   ),
                 ],
               ),
               SizedBox(height: 10),
 
               // Categories Row
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    CategoryItem(
-                      imageUrl: 'https://via.placeholder.com/50',
-                      label: 'Vegetables',
-                    ),
-                    CategoryItem(
-                      imageUrl: 'https://via.placeholder.com/50',
-                      label: 'Fruits',
-                    ),
-                    CategoryItem(
-                      imageUrl: 'https://via.placeholder.com/50',
-                      label: 'Dairy',
-                    ),
-                    CategoryItem(
-                      imageUrl: 'https://via.placeholder.com/50',
-                      label: 'Vegetables',
-                    ),
-                  ],
-                ),
-              ),
+              // SingleChildScrollView(
+              //   scrollDirection: Axis.horizontal,
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //     crossAxisAlignment: CrossAxisAlignment.center,
+              //     children: [
+              //       CategoryItem(
+              //         imageUrl: 'https://t4.ftcdn.net/jpg/00/65/70/65/360_F_65706597_uNm2SwlPIuNUDuMwo6stBd81e25Y8K8s.jpg',
+              //         label: 'Vegetables',
+              //       ),
+              //
+              //       CategoryItem(
+              //         imageUrl: 'https://via.placeholder.com/50',
+              //         label: 'Fruits',
+              //       ),
+              //       CategoryItem(
+              //         imageUrl: 'https://via.placeholder.com/50',
+              //         label: 'Dairy',
+              //       ),
+              //       CategoryItem(
+              //         imageUrl: 'https://via.placeholder.com/50',
+              //         label: 'Vegetables',
+              //       ),
+              //     ],
+              //   ),
+              // ),
+              CategoriesRow(),
               SizedBox(height: 20),
 
               // Product List (sample)
@@ -145,10 +163,11 @@ class _HomePageState extends State<HomePage> {
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                 ),
-                itemCount: 4, // Example count
+                itemCount: 10,
+                // Example count
                 itemBuilder: (context, index) {
                   return ProductCard(
-                    imageUrl: 'https://via.placeholder.com/100',
+                    imageUrl: 'https://www.foodiesfeed.com/wp-content/uploads/2023/06/pouring-honey-on-pancakes.jpg',
                     title: 'Product $index',
                     price: '₹${(index + 5.60).toStringAsFixed(2)}/kg',
                   );
@@ -165,4 +184,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-

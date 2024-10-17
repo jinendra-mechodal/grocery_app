@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
         GetPage(name: '/profile', page: () => ProfilePage()),
         GetPage(name: '/edit_profile', page: () => EditProfilePage()),
       ],
-      home: OnboardingPage1(),
+      home: HomePage(),
     );
   }
 }
