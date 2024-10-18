@@ -120,6 +120,7 @@ class _HomePageState extends State<HomePage> {
                   TextButton(
                     onPressed: () {
                       // Handle See All action
+
                     },
                     child: Text('See All',
                       style: poppins400.copyWith(
@@ -133,32 +134,6 @@ class _HomePageState extends State<HomePage> {
               SizedBox(height: 10),
 
               // Categories Row
-              // SingleChildScrollView(
-              //   scrollDirection: Axis.horizontal,
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              //     crossAxisAlignment: CrossAxisAlignment.center,
-              //     children: [
-              //       CategoryItem(
-              //         imageUrl: 'https://t4.ftcdn.net/jpg/00/65/70/65/360_F_65706597_uNm2SwlPIuNUDuMwo6stBd81e25Y8K8s.jpg',
-              //         label: 'Vegetables',
-              //       ),
-              //
-              //       CategoryItem(
-              //         imageUrl: 'https://via.placeholder.com/50',
-              //         label: 'Fruits',
-              //       ),
-              //       CategoryItem(
-              //         imageUrl: 'https://via.placeholder.com/50',
-              //         label: 'Dairy',
-              //       ),
-              //       CategoryItem(
-              //         imageUrl: 'https://via.placeholder.com/50',
-              //         label: 'Vegetables',
-              //       ),
-              //     ],
-              //   ),
-              // ),
               CategoriesRow(),
               SizedBox(height: 20),
 
