@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'features/home/home_landing_page/view/home_page.dart';
+import 'features/home/home_landing_page/view/view/home_page.dart';
 import 'res/routes/routes.dart';
 import 'res/routes/routes_name.dart';
 

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import '../../../../res/fonts/app_fonts.dart';
-import 'widget/CategoryItem.dart';
-import 'widget/ProductCard.dart';
-import 'widget/custom_bottom_navigation_bar.dart';
+import '../../../../../res/fonts/app_fonts.dart';
+import '../../../../../res/routes/routes_name.dart';
+import '../../../categories_page/view/data/CategoryItem.dart';
+import '../data/product_data.dart';
+import '../widget/ProductCard.dart';
+import '../widget/CategoriesRow.dart';
+import '../widget/custom_bottom_navigation_bar.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -63,6 +66,7 @@ class _HomePageState extends State<HomePage> {
             ),
             onPressed: () {
               // Handle cart icon press
+              Get.toNamed(AppRoutes.myCart);
             },
           ),
           SizedBox(width: 16), // Space between title and icon
@@ -120,6 +124,7 @@ class _HomePageState extends State<HomePage> {
                   TextButton(
                     onPressed: () {
                       // Handle See All action
+                      Get.toNamed(AppRoutes.allCategories);
 
                     },
                     child: Text('See All',
@@ -147,17 +152,30 @@ class _HomePageState extends State<HomePage> {
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                 ),
-                itemCount: 10,
-                // Example count
+                itemCount: products.length,
                 itemBuilder: (context, index) {
-                  return ProductCard(
-                    imageUrl: 'https://www.foodiesfeed.com/wp-content/uploads/2023/06/pouring-honey-on-pancakes.jpg',
-                    title: 'Product $index',
-                    subtitle: 'Fruits',
-                    price: '₹${(index + 5.60).toStringAsFixed(2)}/kg',
+                  final product = products[index];
+                  return GestureDetector(
+                    onTap: () {
+                      // Print product details to the console
+                      print('Product Title: ${product.title}');
+                      print('Product Subtitle: ${product.subtitle}');
+                      print('Product Price: ${product.price}');
+
+                      // Redirect to the product detail page
+                      Get.toNamed(AppRoutes.productDetails, arguments: product);
+                    },
+                    child: ProductCard(
+                      imagePath: product.imagePath,
+                      title: product.title,
+                      subtitle: product.subtitle,
+                      price: product.price,
+                    ),
                   );
                 },
               ),
+
+
 
               SizedBox(height: 10),
             ],
